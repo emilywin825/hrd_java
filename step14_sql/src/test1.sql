@@ -11,7 +11,7 @@
     : grant,  revoke
 
 
-※ select
+	※ select
 [형식]
  select [distinct] [컬럼1,컬럼2,.....][as 별명][ || 연산자][*]
  from 테이블명

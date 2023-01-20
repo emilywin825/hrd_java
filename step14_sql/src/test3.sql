@@ -143,9 +143,13 @@ select * from departments;  --27
 --ex1) inner join : 같은것끼리만 조인
 --사원테이블과 부서테이블에서 부서가 같을경우 사원번호,부서번호,부서이름을 출력하시오  -- 106건
 --오라클 구문
-select employee_id, employees.department_id, department_name
-from employees, departments
-where employees.department_id=departments.department_id
+select employee_id, e.department_id,department_name
+from employees e, departments d
+where e.department_id=d.department_id;
+
+select employee_id, e.department_id, department_name
+from employees e
+inner join department d using(department_id);
 
 select employee_id, e.department_id, department_name
 from employees e, departments d
