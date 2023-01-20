@@ -143,6 +143,28 @@ where salary=(select round(avg(salary),-3) from employees)
     
 select department_name, salary
 from employees e, departments d
+where salary=(sum(salary) from employees group by department_name)
+
+
+select department_name, sum(salary)
+from employees e, departments d
+where e.department_id=d.department_id
+group by department_name; 
+--1
+select *
+from employees
+left join deaprtments using(department_id)
+--2
+select department_name
+from employees
+left join departments using(department_id)
+group by department_name --group by로 묶은 컬름을 select에 요청
+--3
+select department_name, sum(salary)
+from employees
+left join departments using(department_id)
+group by department_name
+having sum(salary)=(select max(sum(salary)) from employees group by department_id)
 
 ------------------------------------------------------------------------------------------------
 --ex12) 업무ID별 급여평균중 전체평균급여보다 적게 받는 업무ID의  
@@ -161,15 +183,23 @@ from employees e, departments d
 --               Stock Clerk	             2000
 --               Shipping Clerk	             3000
 
-select department_name, salary
-from departments d,employees e
-where salary<(select round(avg(salary),-3) from employees where department_name
-=(select department_name from departments where e.department_id=d.department_id))
-
+select job_title, trunc(avg(salary),-3)
+from employees
+left join jobs using(job_id)
+group by job_title
+having avg(salary)<(select avg(salary) from employees)
 --==================================================================================================
 -- 다중행 서브쿼리
+-- all : 모두 일치 할 때 결과값 리턴
+-- any : 하나라도 일치하면 결과값 리턴
+-- < any : 특정한 것(최대값) 보다 적음, 비교대상 중 최대값보다 적음
+-- > any : 특정한 것(최소값) 보다 큼, 비교대상 중 최소값보다 큼
+-- < all : 전체(가장 작은 것이 포함)보다 작음, 비교대상의 최소값보다 작음
+-- > all : 전체(가장 큰 것이 포함)보다 큼, 비교대상의 최대값보다 큼
+
 --ex13) 'SA_REP' 직급보다 급여가 많은 'ST_MAN'직급 직원들을 조회하시오    -- 4 레코드
-                                           
+   select salary from employees where job_id='SA_REP';                                        
+   select salary from employees where job_id='ST_MAN';                                        
 --[분석]
 --ST_MAN 사원의 급여 8000, 8200,7900,6500,5800 중 5800만 제외됨
 --SA_REP의 최소급여는 6100이기 때문
@@ -181,19 +211,18 @@ where salary<(select round(avg(salary),-3) from employees where department_name
 --Kaufling    ST_MAN    7900
 --Vollman     ST_MAN    6500
 
-
-
-
-
+select last_name, job_id, salary
+from employees
+where job_id='ST_MAN' and salary >any(select salary from employees where job_id='SA_REP')
 ------------------------------------------------------------------------------------------------
 --ex14) 'SA_REP' 직급의 최소급여보다 급여가 적은 'ST_MAN'직급 직원들을 조회하시오   -- 1 레코드
 --last_name   job_id   salary
 -------------------------------
 --Mourgos	ST_MAN	5800
 
-
-
-
+select last_name, job_id, salary
+from employees
+where job_id='ST_MAN' and salary < all(select salary from employees where job_id='SA_REP')
 
 -------------------------------------------------------------------------------------------------
 --       (9000,4800,4200,6000)
@@ -209,8 +238,12 @@ where salary<(select round(avg(salary),-3) from employees where department_name
 --      Abel         SA_REP        11,000달러
 --      Vishney      SA_REP        10,500달러
 
+select last_name"사원명", job_id "업무ID", to_char(salary, '999,999')||'달러' "급여"
+from employees
+where job_id in('FI_ACCOUNT','SA_REP') and salary>all(select salary from employees where job_id='IT_PROG')
+order by 3 desc;
 
-
+-- where job_id in('FI_ACCOUNT','SA_REP') == where job_id=any(('FI_ACCOUNT','SA_REP')
 
 ------------------------------------------------------------------------------------------------
 --ex16) 'IT_PROG'와 같은 급여를 받는 사원들의 이름,업무ID,급여를 전부 구하시오  ==> 10레코드
@@ -219,25 +252,50 @@ where salary<(select round(avg(salary),-3) from employees where department_name
 --McEwen   SA_REP   9000
 --Hall     SA_REP   9000
 
-
-
-
+select last_name, job_id, salary
+from employees
+where salary in(select salary from employees where job_id='IT_PROG')
 
 -------------------------------------------------------------------------------------------------
 --ex17) 전체직원에 대한 관리자와 직원을 구분하는 표시를 하시오(in, not in이용)
 --        조건1) 구분별 오름차순하고 사원번호별 오름차순정렬하시오
 -- 사원번호      이름       구분
 -------------------------------------
--- 100                King      관리자
+-- 100         King      관리자
 
+--1. in 연산자
+select employee_id, last_name, 
+       case when employee_id 
+       in(select distinct manager_id from employees) then '관리자' else '직원' end
+from employees 
+order by 3,1;
 
-
-
+-- 2. union, in, not in
+select employee_id, last_name,'관리자' "구분"
+from employees
+where employee_id in(select distinct manager_id from employees)
+union 
+select employee_id, last_name,'직원' "구분"
+from employees
+where employee_id not in(select distinct manager_id 
+                          from employees 
+                          where manager_id is not null)
+                          
+-- 3. 상관 쿼리                          
+-- 메인 쿼리에서 한 행을 읽고 해당값을 서브쿼리에서 참조하여 서브쿼리에 존재하면 true를 리턴
+select employee_id 사원번호, last_name 이름, '관리자' "구분"
+from employees e
+where exists(select null from employees where e.employee_id=manager_id)
+union
+select employee_id 사원번호, last_name 이름, '직원' "구분"
+from employees e
+where not exists(select null from employees where e.employee_id=manager_id)
+order by 3,1;
 
 ------------------------------------------------------------------------------------------------
 --ex18) 다음과 같은 조건에 맞는 행을 검색하시오   ==> 28레코드
 --      조건1) 직급별 평균급여를 구한후 모든 사원중 그 급여를 받는 사원을 조회하시오
---               (단, 100단위 이하 절삭)
+--               (단, 100단위 이하 절사)
 --      조건2) 출력할 급여는 세자리마다 콤마와 $표시
 --      조건3) 사원이름(last_name),직무(job_title) ,급여(salary) 로 표시하시오
 --      조건4) 급여순으로 오름차순 정렬하시오
@@ -248,21 +306,42 @@ where salary<(select round(avg(salary),-3) from employees where department_name
 --         Errazuriz    Sales Manager	     $12,000
 --         Greenberg    Finance Manager	     $12,008
 
-
-
-
+select last_name "사원이름", job_title "직무", '$'||to_char(salary, '999,999') "급여" 
+from employees
+left join jobs using(job_id)
+where trunc(salary,-2) in (select trunc(avg(salary),-2)from employees group by job_id)
 
 ------------------------------------------------------------------------------------------------
 --ex19) group by rollup : a,b별 집계
 --부서별, 직무ID별 급여평균구하기(동일부서에 대한 직무별 평균급여)
 --조건1) 반올림해서 소수 2째자리까지 구하시오
 --조건2) 제목은 Job_title, Department_name, Avg_sal로 표시하시오
+select department_name 
 
+left join departments using(department_id)
+left join jobs using(job_id)
+group by rollup(department_name,job_title)
 
 ------------------------------------------------------------------------------------------------
 --ex20) group by cube :  a별 집계 또는 b별 집계
 --부서별, 직무ID별 급여평균구하기(부서를 기준으로 나타내는 평균급여)      
 
+select department_name Department_name, job_title Job_title,
+       round(avg(salary),2) Avg_sal
+from employees
+left join departments using(department_id)
+left join jobs using(job_id)
+group by cube(department_name,job_title)
+
 ------------------------------------------------------------------------------------------------
 --ex21) group by grouping sets
---직무별 평균급여와 전체사원의 평균급여를 함께 구하시오        
+--직무별 평균급여와 전체사원의 평균급여를 함께 구하시오  
+      
+select job_title, round(avg(salary),2) Avg_sal
+from employees
+left join departments using(department_id)
+left join jobs using(job_id)
+group by grouping sets((job_title,department_id))
+
+grouping sets((job_title,department_id)) -- ()안에 들어간 job_title, department_id를 그룹화 하겠다.
+grouping sets((job_title),()) -- () : 합계
