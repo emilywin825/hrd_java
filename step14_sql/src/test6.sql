@@ -88,7 +88,8 @@ as  select  *  from 테이블명2  where 1=0 --> where 참이 아닌 조건을 �
 ---------------------------------------------------------------------------------
 [시퀀스]
  : 순차적으로 정수값을 자동으로 생성하는 객체
-
+ex)기존 사원번호가 206번까지 있고 신입사원이 들어오면 신입사원의 번호는 207이 되어야 하는데
+신입사원의 번호가 207이 되려면 206에 +1할 수 있는 로직을 심어두어야 함-> 시퀀스
 create  sequence  시퀀스명
 [increment by 증가값] [start with 시작값]
 [maxvalue  최대값 | minvalue  최소값]
@@ -391,12 +392,13 @@ select * from user5;
 --ex23) 테이블(idx->bunho,  name -> irum,  address -> juso) 을 복사하고  
 --id가  bbb인 레코드를 복사하시오
 --원본테이블 : user1   / 사본테이블 : user5
+drop table user5;
 
 create table user5 (bunho,irum,juso)
 as
-select idx,name,address from user1 where 1=0;
+select idx,name,address from user1 where id='bbb';
 
-insert into user5 (bunho,irum,juso) select idx,name,address from user1 where id='bbb';
+select * from user1;
 
 ================================================================================================
 --ex24) 테이블생성후 행추가
@@ -434,22 +436,29 @@ insert into dept(dname) values(40,'경리부');      --오류(컬럼갯수가 �
 insert into dept values(40,'경리부');
 select * from dept;
 
+insert into emp(empno,ename,deptno) values(100,'강호동',10);
+insert into emp(empno,ename,deptno) values(101,'아이유',20);
+insert into emp(empno,ename,deptno) values(102,'유재석',50);
+           -- 50번부서 없음(무결성제약조건위배)-부모키가 없습니다
+insert into emp(empno,ename,deptno) values(103,'이효리',40);
+insert into emp(empno,ename) values(105,'장동건');
+
+
 --ex25) 삭제
 --dept테이블에서 20번 부서를 삭제하시오 
-delete 
-
+delete from dept
+where deptno=20
 
 --삭제된 행을 되돌리시오
 rollback 
 
-
 --ex26) 삭제(delete)
 --40번부서를 삭제하시오
-
-
+delete from user5
+where deptno=40
 
 --삭제된 행을 되돌리시오
-
+rollback
 
 
 --참고)  
@@ -460,8 +469,8 @@ rollback
 
 --ex27) 수정(update)
 --장동건의 부서를 30으로 수정하시오
-
-
+update emp set deptno=30
+where ename='장동건'
 
 --================================================================================================
 --[문제5]
