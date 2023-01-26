@@ -4,7 +4,7 @@ select * from tab;
 drop table addressbook purge;
 
 create table addressbook(
-	num		number		primary key,
+	num		number			primary key,
 	name	varchar2(10)	not null,
 	phone	varchar2(15),
 	addr	varchar2(70)
@@ -17,4 +17,21 @@ insert into addressbook values(num_seq.nextval,'aaa','010-111-1111','서울');
 insert into addressbook values(num_seq.nextval,'bbb','010-222-2222','울릉도');
 insert into addressbook values(num_seq.nextval,'ccc','010-333-3333','제주도');
 
-select * from addressbook;
+//update addressbook set phone='333-3333', addr='거제도' where num=3;
+//delete from addressbook where num=3;
+ select * from addressbook;
+
+
+create table dttb(
+    num     number 			primary key,
+	name	varchar2(10)	not null,
+	phone	varchar2(15),
+	addr	varchar2(70)
+)
+
+create sequence dt_seq start with 1 increment by 1 nocycle nocache;
+
+insert into dttb values(dt_seq.nextval,'aaa','010-111-1111','서울');
+insert into dttb values(dt_seq.nextval,'bbb','010-222-2222','울릉도');
+select * from dttb;
+
