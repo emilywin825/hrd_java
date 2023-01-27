@@ -35,9 +35,7 @@ public class EmpDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rs);
-			close(pstmt);
-			close(conn);
+			close(rs); close(pstmt); close(conn);
 		}
 	}
 
@@ -83,15 +81,8 @@ public class EmpDao {
 				System.out.print(rs.getString("phone") + "\t"); // ==rs.getInt(3);
 				System.out.print(rs.getString("addr") + "\n"); // ==rs.getInt(4);
 			}
-
 		} catch (SQLException e) {
-
-		} finally {
-			close(conn);
-			close(rs);
-			close(pstmt);
-		}
-
+		} finally { close(conn); close(rs); close(pstmt); }
 		return ck;
 	}
 
@@ -116,8 +107,7 @@ public class EmpDao {
 			rollback(conn);
 			System.out.println("데이터 수정에 실패");
 		} finally {
-			close(conn);
-			close(pstmt);
+			close(conn); close(pstmt);
 		}
 	}
 
@@ -134,7 +124,7 @@ public class EmpDao {
 				System.out.println("삭제 성공");
 			}
 		} catch (SQLException e) {
-			rollback(conn); System.out.println("데이터 수정에 실패");
+			rollback(conn); System.out.println("데이터 삭제에 실패");
 		}finally {
 			close(conn); close(pstmt);
 		}

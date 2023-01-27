@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class dbtest {
 	Connection conn = null;
@@ -21,33 +22,56 @@ public class dbtest {
 		}
 	}
 
-	public void dttbList() { // db 조회,PreparedStatement 사용
-		PreparedStatement pstmt = null;
+//	public void dttbList() { // db 조회,PreparedStatement 사용
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		//String sql = "Select * from dttb where name=?";
+//		String sql = "Select * from dttb";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			//pstmt.setString(1, name);
+//			rs = pstmt.executeQuery();// db 조회(select,show) : executeQuery , 그 외 : executeUpdate();
+//			while (rs.next()) {
+//				System.out.print(rs.getInt(1) + "\t");
+//				System.out.print(rs.getString(2) + "\t");
+//				System.out.print(rs.getString(3) + "\t");
+//				System.out.print(rs.getString(4) + "\n");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (pstmt != null) pstmt.close();
+//				if (rs != null) rs.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+	public void dttbList() {// statement 사용
+		Statement stmt = null;
 		ResultSet rs = null;
-		//String sql = "Select * from dttb where name=?";
-		String sql = "Select * from dttb";
+		String sql = "SELECT * FROM dttb";
 		try {
-			pstmt = conn.prepareStatement(sql);
-			//pstmt.setString(1, name);
-			rs = pstmt.executeQuery();// db 조회(select,show) : executeQuery , 그 외 : executeUpdate();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				System.out.print(rs.getInt(1) + "\t");
-				System.out.print(rs.getString(2) + "\t");
-				System.out.print(rs.getString(3) + "\t");
-				System.out.print(rs.getString(4) + "\n");
+				System.out.print(rs.getInt("num") + "\t");
+				System.out.print(rs.getString("name") + "\t");
+				System.out.print(rs.getString("phone") + "\t");
+				System.out.print(rs.getString("addr") + "\n");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (pstmt != null) pstmt.close();
+				if (stmt != null) stmt.close();
 				if (rs != null) rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			} catch (SQLException e) { e.printStackTrace(); }
 		}
 	}
-	
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 //	public void dttbInsert(String name,String phone,String addr) {//데이터 추가
 //		PreparedStatement pstmt=null;
 //		String sql="insert into dttb values(dt_seq.nextval,?,?,?)";
@@ -76,7 +100,7 @@ public class dbtest {
 //			}
 //		}
 //	}
-	
+
 //	public void dttbUpdate(int num, String name, String phone, String addr) {//데이터 수정
 //		PreparedStatement pstmt=null;
 //		
@@ -103,30 +127,31 @@ public class dbtest {
 //			e.printStackTrace();
 //		}
 //	}
-	public void dttbDelete(int num) {
-		PreparedStatement pstmt=null;
-		
-		try {
-			String sql="delete from dttb where num=?";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			int n=pstmt.executeUpdate();
-			if(n>0) {
-				conn.commit(); System.out.println(num+"번째 데이터 삭제");
-			}
-		} catch (SQLException e) {
-			try {
-				conn.rollback(); System.out.println("데이터 삭제 실패");
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}finally {
-			try {
-				if (pstmt != null) pstmt.close();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		}
-	}
+
+//	public void dttbDelete(int num) {
+//		PreparedStatement pstmt=null;
+//		
+//		try {
+//			String sql="delete from dttb where num=?";
+//			pstmt=conn.prepareStatement(sql);
+//			pstmt.setInt(1, num);
+//			int n=pstmt.executeUpdate();
+//			if(n>0) {
+//				conn.commit(); System.out.println(num+"번째 데이터 삭제");
+//			}
+//		} catch (SQLException e) {
+//			try {
+//				conn.rollback(); System.out.println("데이터 삭제 실패");
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				if (pstmt != null) pstmt.close();
+//			} catch (SQLException e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//	}
 }

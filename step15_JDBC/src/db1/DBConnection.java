@@ -16,8 +16,9 @@ import java.sql.Statement;
  */
 
 public class DBConnection {
-	Connection conn = null;//2. 연결 객체 생성
+	Connection conn = null;// 2. 연결 객체 생성
 //connection 객체에 요청(commit 처리 해달라 등)
+
 	public DBConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");// Class.forName 역할 1.드라이버로드-->ojdbc6를 사용할 수 있게됨
@@ -25,8 +26,10 @@ public class DBConnection {
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "edu", "1234");
 			// database Development->database Connections->연결할 db 마우스
 			// 오른쪽->Properties->Driver properties
-			//JDBC 드라이버에서 데이터 베이스와 연결된 커넥션을 가져오기 위해 DriverManager 클래스의 getConnection() 메소드 사용
-			//객체 생성되는 순간 드라이버(oracle.jdbc.driver.OracleDriver)검색 후 검색된 드라이버를 이용해 Connection 객체를 생성한 후 이를 반환
+			// JDBC 드라이버에서 데이터 베이스와 연결된 커넥션을 가져오기 위해 DriverManager 클래스의 getConnection() 메소드
+			// 사용
+			// 객체 생성되는 순간 드라이버(oracle.jdbc.driver.OracleDriver)검색 후 검색된 드라이버를 이용해 Connection
+			// 객체를 생성한 후 이를 반환
 			conn.setAutoCommit(false); // AutoCommit 오류메시지 방지
 //			if (conn != null)
 //				System.out.println("연결 성공~");
@@ -109,11 +112,10 @@ public class DBConnection {
 //	}
 
 //----------------------------------------------------------------------------------Statement
-	public void addressList() {	//전체 목록 조회
+	public void addressList() { // 전체 목록 조회
 		Statement stmt = null;// java.sql 선택
-		ResultSet rs = null; 
-		//ResultSet : Statement / PreparedStatement 객체로 select 문을 사용하여 얻어온 레코드 값을 테이블 형태로 가진 객체
-
+		ResultSet rs = null;
+		// ResultSet : Statement / PreparedStatement 객체로 select 문을 사용하여 얻어온 레코드 값을 테이블 형태로 가진 객체
 		String sql = "select * from addressbook";
 		try {
 			stmt = conn.createStatement(); // PreparedStatement 방식과 다르게
@@ -129,8 +131,10 @@ public class DBConnection {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-				if (stmt != null) stmt.close();
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -172,7 +176,7 @@ public class DBConnection {
 //		PreparedStatement pstmt = null;
 //		String sql = "update addressbook set phone=?, addr=? where num=?";
 //		try {
-//			pstmt = conn.prepareStatement(sql);
+//			pstmt = conn.prepareStatement(sql); //db에 접근할 때 sql문장 전달
 //			pstmt.setString(1, phone);
 //			pstmt.setString(2, addr);
 //			pstmt.setInt(3, num);
@@ -206,7 +210,7 @@ public class DBConnection {
 //		
 //		try {
 //			stmt=conn.createStatement();
-//			int n=stmt.executeUpdate(sql);
+//			int n=stmt.executeUpdate(sql); //객체 내부에 sql 문장 가지고 들어감
 //			
 //			if(n>0) {
 //				conn.commit();
@@ -216,7 +220,6 @@ public class DBConnection {
 //			try {
 //				conn.rollback();
 //			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}
 //			e.printStackTrace();
@@ -224,7 +227,6 @@ public class DBConnection {
 //			try {
 //			if (stmt != null) stmt.close();
 //		} catch (SQLException e2) {
-//			// TODO Auto-generated catch block
 //			e2.printStackTrace();
 //		}
 //	}
@@ -257,4 +259,34 @@ public class DBConnection {
 //			}
 //		}
 //	}
+//	--------------------------------------Statement
+	public void addressDelete(int num) {
+		Statement stmt = null;
+
+		try {
+			String sql = "delete from addressbook where num=" + num;
+			stmt = conn.createStatement();
+			int n = stmt.executeUpdate(sql);
+			if (n > 0) {
+				conn.commit();
+				System.out.println(n + "건의 데이터가 삭제되었습니다");
+			}
+
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+				System.out.println("데이터 삭제에 실패하였습니다");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+		} finally {
+			try {
+				if (stmt != null) stmt.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+			}
+		}
+
+	}
 }

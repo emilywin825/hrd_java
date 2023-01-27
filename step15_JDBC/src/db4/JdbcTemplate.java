@@ -1,4 +1,4 @@
-package db2;
+package db4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,15 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcTemplate {
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection()  {
 		Connection conn = null;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver"); // 1.
+			Class.forName("oracle.jdbc.OracleDriver"); // 1.
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "edu", "1234");
 			conn.setAutoCommit(false);
 //			if (conn != null) System.out.println("연결 성공!");
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conn;

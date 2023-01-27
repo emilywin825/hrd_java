@@ -23,6 +23,6 @@ public class DBMain {
 		//dt.dttbInsert("짱아","357-0159","도쿄");
 		//dt.dttbUpdate(5,"수지","753-9951","일본");
 //		dt.dttbDelete(1);
-//		dt.dttbList();
+		dt.dttbList();
 	}
  }

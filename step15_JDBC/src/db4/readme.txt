@@ -1,0 +1,8 @@
+//db4 패키지의 파일 기능 정리
+
+	JdbcTemplate -- 데이터베이스 연동 템플릿
+	EmpEntity 	-- 	addressbook 객체
+	EmpBiz 		--	계산 또는 유효성 검사등을 처리하는 파일
+	EmpDao		--	데이터베이스와 자바를 연동하는 비지니스 로직
+	EmpView		--	결과 출력 화면
+	

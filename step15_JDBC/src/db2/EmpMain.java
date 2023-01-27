@@ -36,7 +36,7 @@ public class EmpMain {
 		dao=new EmpDao();
 	}
 
-	private void menu() throws SQLException {
+	public void menu() throws SQLException {
 		int n = 0;
 		String name=null, phone=null, addr=null;
 		
@@ -71,8 +71,7 @@ public class EmpMain {
 				System.out.println("삭제할 사람 : "); name=sc.next();
 				if(dao.addressSearch(name)) { //이름 존재하면
 					dao.addressDelete(name);
-				}else {
-					System.out.println("삭제할 대상이 되는 사람이 없어요");
+				}else { System.out.println("삭제할 대상이 되는 사람이 없어요");
 				}
 				break;
 			case 5:
@@ -89,7 +88,6 @@ public class EmpMain {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		new EmpMain().menu();
+		new EmpMain().menu(); 
 	}
-
 }
