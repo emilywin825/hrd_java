@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import oracle.net.aso.e;
 
 import static db4.JdbcTemplate.*; //db3페키지에 있는 JdbcTemplate의 메소드 사용 가능
@@ -35,7 +36,6 @@ public class EmpDao {
 				entity.setAddr(rs.getString("addr"));
 				list.add(entity);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -91,5 +91,40 @@ public class EmpDao {
 		}
 		
 		return entity;
+	}
+
+	public int addressUpdate(String name,String phone,String addr) {
+		Connection conn=getConnection(); PreparedStatement ptstm=null;
+		int n=0;
+		String sql = "update addressbook set phone=?,addr=? where name=?";
+		try {
+			ptstm=conn.prepareStatement(sql);
+			ptstm.setString(1, phone);
+			ptstm.setString(2, addr);
+			ptstm.setString(3, name);
+			n=ptstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn); close(ptstm);
+		}
+		return n;
+	}
+
+	public int addressDelte(String name) {
+		Connection conn=getConnection();
+		PreparedStatement ptstm=null;
+		int n=0;
+		String sql="delete from addressbook where name=?";
+		try {
+			ptstm=conn.prepareStatement(sql);
+			ptstm.setString(1, name);
+			n=ptstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(conn); close(ptstm);
+		}
+		return n;
 	}
 }

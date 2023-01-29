@@ -8,7 +8,7 @@ public class EmpMain {
 	EmpBiz biz=null;
 	EmpEntity entity=null;
 	
-	public EmpMain() {
+	public EmpMain() {// 객체 생성
 		sc = new Scanner(System.in);
 		biz=new EmpBiz();
 		entity=new EmpEntity();
@@ -36,10 +36,27 @@ public class EmpMain {
 				biz.addressInsert(entity);
 				break;
 				
+			case 3:
+				System.out.print("변경을 원하는 고객의 이름입력 : ");
+				name=sc.next();
+				System.out.print("변경할 전화입력 : ");
+				phone=sc.next();
+				System.out.print("변경할 주소입력 : ");
+				addr=sc.next();
+				biz.addressUpdate(name,phone,addr);
+				break;
+			
+			case 4:
+				System.out.print("삭제할 이름입력 : ");
+				name=sc.next();
+				biz.addressDelete(name);
+				break;				
+
 			case 5:
 				System.out.print("이름입력 : ");
 				name=sc.next();
-				biz.addressSearch(name); break;
+				biz.addressSearch(name); 
+				break;
 				
 				
 			case 6:

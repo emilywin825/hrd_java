@@ -31,4 +31,14 @@ public class EmpView {
 			System.out.println("찾는 사람이 없어요");//데이터가 null이여서 없는거임
 		}
 	}
+
+	public void addressUpdate(int n) {
+		if(n>0)System.out.println(n+"건의 데이터 수정 완료");
+		else System.out.println("데이터 수정 실패");
+	}
+
+	public void addressDelete(int n) {
+		if(n>0)System.out.println(n+"건의 데이터 삭제 완료");
+		else System.out.println("데이터 삭제 실패");		
+	}
 }
