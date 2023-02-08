@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+</head>
+<body>
+<form name="frm">
+	A값 : <input type="text" size="7" name="a">&nbsp;&nbsp;&nbsp;
+	B값 : <input type="text" size="7" name="b">&nbsp;&nbsp;&nbsp;
+	결과 : <input type="text" size="7" name="rs">
+	<input type="button" name="+" value="더하기" onclick="plusFuc()">
+	<input type="button" name="/" value="나누기" onclick="diviFuc()">
+</form>
+
+<script type="text/javascript"> /* js가 볼때는 태그하나하나가 객체  */
+	function plusFuc() {
+		var a=parseInt(frm.a.value); /* name="a"를 찾아가려면 frm이 가지고 있는 a가 가지고 있는 값 */
+		var b=parseInt(frm.b.value);
+		
+		/* isNaN:입려된 값이 숫자인가 아닌가를 판단 */
+		if(isNaN(a) || isNaN(b)){
+			alert("입력된 값이 숫자가 아니에요");
+			frm.a.value="";
+			frm.b.value="";
+			frm.a.focus();
+			return;
+		}
+		return frm.rs.value=a+b;
+}
+
+function diviFuc(){
+	var a=parseInt(frm.a.value);
+	var b=parseInt(frm.b.value);
+	rs=a/b;
+	if(isFinite(rs)==false){
+		alert("0으로 나눌 수 없습니다");
+		frm.a.value="";
+		frm.b.value="";
+		frm.a.focus();
+		return;
+	}
+	return frm.rs.value=(a/b);
+}
+</script>
+</body>
+</html>

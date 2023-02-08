@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+	var a='http://www.naver.com/webtoon?str=자바스크립트'; /* 정상적으로 동작 단될 수 있음 -> 인코딩해서 넘김  */
+	var b=encodeURI(a);
+	var c=encodeURIComponent(a);
+	
+	document.write('<p>URI<br>'+a+'</p>');
+	document.write('<p>encodeURI<br>'+b+'</p>'); /* 인터넷 주소에서 사용하는 :, ;, /, =, ?, & 등을 제외하고 인코딩하는 함수 */
+	document.write('<p>decodeURI<br>'+decodeURI(b)+'</p>');
+	
+	document.write('<p>encodeURIComponent<br>'+c+'</p>');/* encodeURIComponent() : 모든 문자를 인코딩하는 함수입니다.  */
+	document.write('<p>encodeURIComponent<br>'+decodeURIComponent(c)+'</p>');
+	
+</script>
+
+</body>
+</html>
+

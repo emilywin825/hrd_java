@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>생성자 호출을 이용한 객체 생성</title>
+
+</head>
+<body>
+	<script type="text/javascript">
+	//js에서 변수 +게터,세터 -->프로퍼티 
+		var User= new Object();
+		User.name='pororo';
+		User.age=23;
+		
+		User.view=function(){
+			document.write('my name is '+this.name+"<br>");
+			document.write('my age is '+this.age);
+		}
+		document.write(typeof User+"<br>");
+		User.view();
+
+	</script>
+
+
+</body>
+</html>

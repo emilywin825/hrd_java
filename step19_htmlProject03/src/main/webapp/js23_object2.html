@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>생성자 함수를 이용한 객체 생성</title>
+
+</head>
+<body>
+	<script type="text/javascript">
+	//생성자 함수를 이용
+	function User(name,age){
+		this.name=name;				
+		this.age=age;				
+		this.view=function(){
+			document.write('my name is '+this.name+'<br>');
+			document.write('my name is '+this.ages+'<br>');
+		}
+	}
+	document.write(typeof User+"<br>"); //function
+	//인스턴스 생성
+	var ob1=new User('pororo',23);
+	var ob2=new User('cron',21);
+	document.write(typeof ob1+"<br>"); //object
+	ob1.view();
+	ob2.view();
+	
+	</script>
+</body>
+</html>

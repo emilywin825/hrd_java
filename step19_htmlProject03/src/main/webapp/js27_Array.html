@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<script>
+	var fruits=['Banana', 'Orange', 'Apple', 'Mango'];
+	
+	document.write(fruits.length+"<br>");
+	var text="";
+	
+	
+	for(i=0;i<fruits.length;i++){
+		//document.write(fruits[i]+"<br>");
+		text+=fruits[i]+'<br>';
+	}
+	document.write(text);
+	
+	document.write("-----------------------------<br>");
+	fruits.sort(); /* 원본 데이터 변경 */
+	document.write(fruits);
+	document.write("<br>");
+	
+	fruits.reverse(); /* 원본 데이터 변경 */
+	document.write(fruits);
+	document.write("<br>");
+	
+</script>
+</body>
+</html>

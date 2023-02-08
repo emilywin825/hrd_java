@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+/* js에서 함수 사용시 function 키워드 사용 */
+	function shape(){
+		document.write("*** 도형의 넓이 ***<br>");
+	}
+	function circleSize(r){ /* 매개변수의 이름만 지정해주면 됨  */
+		document.write("원의 넓이 : "+(r*r*3.14)+"<br>");
+	}
+	function getSquareSize(w,h){
+		return w*h;
+	}
+	
+	shape();
+	circleSize(10);
+	document.write("사각형의 넓이 : "+getSquareSize(4, 5));
+</script>
+</body>
+</html>
