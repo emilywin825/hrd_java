@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>표준 이벤트 모델</title>
+<style type="text/css">
+	#box{
+		background-color :silver;
+		border: 1px solid black;
+		padding: 5px;
+		width:300px;
+		height:200px;
+	}
+
+</style>
+
+
+</head>
+<body>
+	<div id="box">
+		<button onclick="addEventHandler()" id="startbtn">시작</button>
+		<button onclick="removeEventHandler()" id="stopbtn">정지</button>
+	</div>
+	<p id="disp"></p>
+	
+	
+
+<script type="text/javascript">
+function addEventHandeler() {/*박스 하나가 객체. 그 박스를 addEventListener에 등록  */
+	document.getElementById("box").addEventListener("mousemove", myFunction);
+}
+
+</script>
+
+
+</body>
+</html>

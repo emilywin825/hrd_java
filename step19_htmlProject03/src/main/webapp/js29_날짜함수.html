@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+	var day=new Array("일","월","화","수","목","금","토"); 
+	var date=new Date();
+	document.write(date);
+	
+	document.write("오늘은 "+date.getFullYear()+"년"
+					+date.getMonth()+"월"
+					+date.getDate()+"일"
+					+day[date.getDay()]+"요일입니다<br>");/* 요일에 관련된 값은 정수로 나옴 */
+					
+	document.write("현재 시간은 "
+					+date.getHours()+" : "
+					+date.getMinutes()+" : "
+					+date.getSeconds()+"입니다.");/* 요일에 관련된 값은 정수로 나옴 */				
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var win = window.open('win1.html', '', 'width=300,height=200'); /* win1.html를 불러와 사용, 객체 이름은 win */
+			win.moveTo(100, 100);/* moveTo : 원하는 위치에 window창 가져다 놓음 */
+		}
+
+		window.setInterval(function() {
+			win.moveBy(20, 20);
+		},1000);
+		
+		window.setInterval(function() {
+			win.close();
+		},5000);
+	</script>
+	
+</body>
+</html>

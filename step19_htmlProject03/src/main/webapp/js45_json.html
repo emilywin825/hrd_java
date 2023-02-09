@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>title>
+<style type="text/css">
+	
+
+</style>
+
+
+</head>
+<body>
+<div id="rs"></div>
+
+
+<script type="text/javascript">
+	function init(){/* "데이터 이름" : 데이터값 */
+		var emp={"name":"진달래",
+				  "age":"23",
+				  "phone":"010-111-1111",
+				  "addr":"역삼동"				
+		};
+	}
+	var msg="";
+	msg +="이름 : "+emp.name+"<br>"
+		+"나이 : "+emp.age+"<br>"
+		+"전화 : "+emp['phone']+"<br>"
+		+"주소 : "+emp['addr']+"<br>"
+		
+		document.getElementById("rs").innerHTMl=msg;
+		
+</script>
+
+
+</body>
+</html>

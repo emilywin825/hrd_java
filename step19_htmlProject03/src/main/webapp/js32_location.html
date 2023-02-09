@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	var t=new Date();
+	document.write(t.getHours()+":"+t.getMinutes()+":"+t.getSeconds());
+	
+	window.setInterval(function(){
+		location.reload(); /* 새로고침 메소드 */
+	},1000);/* 1초마다 새로고침 */
+
+</script>
+</body>
+</html>

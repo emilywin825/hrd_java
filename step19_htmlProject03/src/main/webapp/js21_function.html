@@ -27,14 +27,14 @@
 			frm.a.focus();
 			return;
 		}
-		return frm.rs.value=a+b;
+		return frm.rs.value=a+b; //frm폼의 rs이름을 가진곳에 a+b를 리턴
 }
 
 function diviFuc(){
 	var a=parseInt(frm.a.value);
 	var b=parseInt(frm.b.value);
 	rs=a/b;
-	if(isFinite(rs)==false){
+	if(isFinite(rs)==false){/* 매개변수가 숫자인가 아닌가를 판단 숫자이면 return true */
 		alert("0으로 나눌 수 없습니다");
 		frm.a.value="";
 		frm.b.value="";
