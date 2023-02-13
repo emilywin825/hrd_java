@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<span>입사연월일</span>
+	<input type="text" name="hire_date" id="hire_date">
+	<input type="submit" id="commit_but" mousedown="process()"><!-- onclick : 사용자가 객체에 클릭할 때  -->
+	<br>
+	<div id="p"></div>
+<script type="text/javascript">
+	/* [ab] a나 b 둘 중에 하나
+	   [^ab] a와 b를 제외한 모든 문자
+	   \문자열 제어코드
+	   \- - 기호 자체
+	   \d 숫자 \D 숫자가 아닌것
+	*/
+/* 	function process(){
+		var date=document.getElementById("hire_date").value;
+		var pattern=
+			new RegExp("^[0-9]{4}\-[012]\-[0-3][0-9]$");
+		if(pattern.test(date)){
+			alert('정상');
+		}else alert('비정상');
+	} */
+	
+function process(){
+		var v = document.getElementById('hire_date').value;
+		document.getElementsByTagName("div")[0].innerHTML=v;
+	}	
+</script>
+
+</body>
+</html>

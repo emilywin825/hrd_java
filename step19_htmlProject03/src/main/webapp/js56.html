@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<img id="bear" src="image/bear.jpg" style="display: none">
+	<canvas id="mycanvas" width="800px" height="600px"></canvas>
+<script type="text/javascript">
+	var canvas=document.getElementById("mycanvas");
+	var ctx=canvas.getContext('2d');
+	
+	var image=document.getElementById("bear");
+	
+	image.addEventListener("load", ()=>{
+		ctx.drawImage(image, 10,10, 200,200);
+	});
+	
+	ctx.font="40px Arial Black";
+	ctx.strokeStyle="rgb(47,157,39)";
+	
+	ctx.fillStyle="rgb(0,34,102)";
+	ctx.fillText("Welcom To My Page", 250, 150)
+	
+	
+	ctx.strokeText("HTML 5 Canvas", 250, 200);
+	
+	
+	
+	
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

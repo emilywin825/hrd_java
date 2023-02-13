@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- ¹®¼­ °´Ã¼ÀÇ ÀÌº¥Æ®¸¦ »ç¿ëÇÏ¿© ÀÌº¥Æ® ÇÚµé·¯¿¡ ¿¬°áÇÏ´Â ¹æ½Ä -->
-</head>
-<body>
-	<input type="button" id="btn1" value="Å¬¸¯1">
-	<input type="button" id="btn2" value="Å¬¸¯2" onclick="alert('Å¬¸¯2')">
-
-<script type="text/javascript">
+<!-- ë¬¸ì„œ ê°ì²´ì˜ ì´ë²¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ì—¬ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ì— ì—°ê²°í•˜ëŠ” ë°©ì‹  -->
+<script>
 	window.onload=function(){
 		var btn=document.getElementById('btn1');
-		btn1.onclick=function(){ /*onclickÇÏ´Â ½ÃÁ¡¿¡ »ç¿ëÇÏ´Â ÇÔ¼ö  */
-			alert('Å¬¸¯1');
-			/* btn1.onclick=null; */ /* ÇÚµé·¯ Á¦°ÅÇÏÁö ¾ÊÀ¸¸é °è¼Ó µ¿ÀÛ */
+		btn1.onclick=function(){ /*onclickí•˜ëŠ” ì‹œì ì— ì‚¬ìš©í•˜ëŠ” í•¨ìˆ˜  */
+			alert('í´ë¦­1');
+			/* btn1.onclick=null; *//* í•¸ë“¤ëŸ¬ë¥¼ ì œê±°í•˜ì§€ ì•Šìœ¼ë©´ ê³„ì† ë™ì‘ */
 		}
-	}
+		
+	};
 
 </script>
-
-
+</head>
+<body>
+	<input type="button" id="btn1" value="í´ë¦­1">
+	<input type="button" id="btn2" value="í´ë¦­2" 
+			onclick="alert('í´ë¦­2')">
+			
+	
+	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

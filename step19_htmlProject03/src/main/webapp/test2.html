@@ -7,20 +7,25 @@
 </head>
 <body>
 
-<h4> history 객체 연습 (세 번째 페이지)</h4>
-<input type="button" value="이전으로" 
-onclick="javascripts:history.back()">
-
-<input type="button" value="다음으로" 
-onclick="javascripts:history.forward()">
-
-<input type="button" value="처음으로" 
-onclick="javascripts:history.go(-2)"> <!-- 2칸 앞으로  -->
+<h3>onclick, 계산기 만들기</h3>
+<hr>
+<p>계산하고자 하는 수식을 입력하고 계산 버튼을 눌러봐요.</p>
+<form>
+<label>식&nbsp;<input type="text" id="ex"></label>
+<br>
+<label>값&nbsp;<input type="text" id="val" onclick="func()">&nbsp;<input type="button" value="계산"></label>
+</form>
+<span id="one"></span>
 
 <script type="text/javascript">
-/* history 객체 : 방문한 페이지의 정보를 가지고 있는 객체 */
-
-document.write("방문한 페이지 수"+history.length);
+function func(){
+	let p=document.getElementById("ex").value;
+	document.getElementById("one	").innerText=p;
+	
+	
+}
 </script>
+
+
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<label for="input">[로그인 화면]</labe><br><br>
+	<input type="text" id="id"><span> 아이디를 입력하세요</span><br>
+	<input type="text" id="pw"><span> 비밀번호를 입력하세요</span><br>
+	
+	<button id="log" onclick="login()">Login</button><br>
+	
+	<span id="confirm"></span>
+	
+<script type="text/javascript">
+	var emp={
+		"id":"abcd",
+		"pw":"1111",
+		"name":"홍길동",
+		"point":"1250"
+	};
+	
+	function login(){
+		var a=document.getElementById("id").value;
+		var b=document.getElementById("pw").value;
+		if(emp.id==a &&emp.pw==b)
+			document.getElementById("confirm").innerHTML=
+				"<span style='color:red'>"+emp.name+
+				"님 환영합니다.<br>현재 포인트는 "+ emp.point+"점입니다</span>"
+		else
+			document.getElementById("confirm").innerHTML="<span style='color:red'>아이디 또는 비밀번호가 다릅니다</span>"
+	}
+	
+</script>	
+</body>
+</html>

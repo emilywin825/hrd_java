@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+						
+</head>
+<!-- <body>
+
+<h4> history 객체 연습 (세 번째 페이지)</h4>
+<input type="button" value="이전으로" 
+onclick="javascripts:history.back()">
+
+<input type="button" value="다음으로" 
+onclick="javascripts:history.forward()">
+
+<input type="button" value="처음으로" 
+onclick="javascripts:history.go(-2)"> 2칸 앞으로 
+
+<script type="text/javascript">
+/* history 객체 : 방문한 페이지의 정보를 가지고 있는 객체 */
+
+document.write("방문한 페이지 수"+history.length);
+</script>
+</body> -->
+<!-- ----------------------------------------------------------------------------- -->
+<body>
+<!-- <p id="p">이곳에 마우스를 올려 보세요</p>
+<button onclick="f(event)">클릭하세요</button>
+<script>
+function f(e) {
+   alert(e.type);  }
+document.getElementById("p").onmouseover = f;
+</script> -->
+
+<!-- <p id="p">버튼을 클릭하면 이벤트 객체를 출력합니다</p>
+<button onclick="f(event)">클릭하세요</button>
+<script type="text/javascript">
+function f(event){
+	let text= "type : "+event.type+"<br>"
+			  +"target : "+event.target;
+	let p=document.getElementById("p");
+	p.innerHTML=text;
+
+}
+</script> -->
+<input type="checkbox">빵(체크 가능)
+<input type="checkbox" onclick="event.preventDefault()">케이크(체크불가)
+
+</body>
+</html>

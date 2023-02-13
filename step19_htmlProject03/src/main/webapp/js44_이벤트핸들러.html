@@ -1,37 +1,57 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Ç¥ÁØ ÀÌº¥Æ® ¸ğµ¨</title>
+<meta charset="UTF-8">
+<title>í‘œì¤€ ì´ë²¤íŠ¸ ëª¨ë¸</title>
 <style type="text/css">
 	#box{
-		background-color :silver;
+		background-color: skyblue;
 		border: 1px solid black;
 		padding: 5px;
-		width:300px;
-		height:200px;
+		width: 300px;
+		height: 200px;
 	}
+	
 
 </style>
-
-
-</head>
-<body>
-	<div id="box">
-		<button onclick="addEventHandler()" id="startbtn">½ÃÀÛ</button>
-		<button onclick="removeEventHandler()" id="stopbtn">Á¤Áö</button>
-	</div>
-	<p id="disp"></p>
-	
-	
-
-<script type="text/javascript">
-function addEventHandeler() {/*¹Ú½º ÇÏ³ª°¡ °´Ã¼. ±× ¹Ú½º¸¦ addEventListener¿¡ µî·Ï  */
+<script>
+function addEventHandler(){/*ë°•ìŠ¤ í•˜ë‚˜ê°€ ê°ì²´. ê·¸ ë°•ìŠ¤ë¥¼ addEventListenerì— ë“±ë¡  */
+	/* ì´ë²¤íŠ¸ ì²˜ë¦¬ê¸° ë“±ë¡  */
 	document.getElementById("box").addEventListener("mousemove", myFunction);
+	/* target.addEventListener(type, ì²˜ë¦¬ê¸°) */
+	
+}
+function removeEventHandler(){
+	document.getElementById("box").removeEventListener("mousemove", myFunction);
+}
+
+function myFunction() {
+	document.getElementById("disp").innerHTML=
+		"xì¢Œí‘œ : "+event.x+"&nbsp;&nbsp;&nbsp;"+"yì¢Œí‘œ : "+event.y;
 }
 
 </script>
-
+</head>
+<body>
+	<div id="box">
+		<button onclick="addEventHandler()" id="startbtn">ì‹œì‘</button>
+		<button onclick="removeEventHandler()" id="stopbtn">ì •ì§€</button>
+	</div>
+	<p id="disp"></p>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

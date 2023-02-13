@@ -1,0 +1,41 @@
+<!-- jquery로 동작 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<style>
+	.container{
+		position: absolute;
+		top: 30px;
+		left: 100px;
+		height: 200px;
+		width: 300px;
+		border: 1px solid red;
+		padding: 20px;
+	}
+</style>
+</head>
+<body>
+	<a id="btn1" href="#">버튼1</a><br><br>
+	<a id="btn2" href="#">버튼2</a><br><br>
+	<br><br>
+	<div id="rs" class="container"></div>
+
+<script type="text/javascript">
+	$().ready(function(){
+		/* 버튼1을 눌렀습니다. style="color:red"
+			css('font','red','font-weight','bold','font-size','20px')
+		*/
+		$('#btn1').click(function(){
+			
+		});
+		
+		
+		/* 버튼2를 눌렀습니다. */
+	});
+</script>
+
+</body>
+</html>

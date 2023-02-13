@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<canvas id="mycanvas1" width="270px" height="100px"
+		style="border: 4px dashed pink"></canvas>
+<canvas id="mycanvas2" width="270px" height="100px"
+		style="border: 4px dotted pink"></canvas>
+
+
+<script type="text/javascript">
+	var c=document.getElementById("mycanvas1");
+	var ctx=c.getContext('2d');
+	
+	ctx.font="30px Consolas";
+	ctx.fillText("Hello HTML5 API", 10 , 50);
+	
+	/* 
+	ctx.moveTo(10,50);
+	ctx.lineTo(260,50);
+	ctx.stroke();
+	*/
+	 
+	var c=document.getElementById("mycanvas2");
+	var ctx=c.getContext('2d');
+	
+	ctx.font="30px Consolas";
+	ctx.strokeText("Hello HTML5 API", 10 , 50);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
