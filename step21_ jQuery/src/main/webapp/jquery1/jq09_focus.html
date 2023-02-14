@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="rs" class="container">
+	<input type="text" id="id" placeholder="아이디"><br><br>
+	<input type="text" id="pw" placeholder="비밀번호"><br><br>
+	<button id="login">로그인</button>
+</div>
+<script type="text/javascript">
+$().ready(function(){
+	
+	
+	$("input").focus(function(){
+		$(this).css('background-color','#eaeaea');
+	});
+	$("input").blur(function(){
+		$(this).css('background-color','#fff');
+	});
+	$('#login').click(function(){
+		var id=$('#id').val();
+		var pw=$('#pw').val();
+		if(id === "") { alert("id 입력"); }
+		else {alert("아 이 디 : "+id+"\n비밀번호 : "+pw);}
+	});
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

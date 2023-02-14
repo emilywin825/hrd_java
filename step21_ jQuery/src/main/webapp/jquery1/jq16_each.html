@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<style type="text/css">
+	*{font-weight:bold;}
+	.s1{color:red;}
+	.s2{color:blue;}
+	.s3{color:limegreen;}
+	.s4{color:yellow;}
+
+</style>
+
+</head>
+<body>
+<!-- .each(function(){})
+	.each는 선택한 요소가 여러개일 때 각각에 대하여 반복하여 함수(function)를 실행할 특정 조건을 만족할 때 
+	 반복작업에서 탈출하려면 return false;를 사용
+ 	ex. jQuery를 사용해 배열을 관리하고자 할 때
+ -->
+ <p>빨강</p>
+ <p>주항</p>
+ <p>노랑</p>
+ <p>초록</p>
+ 
+ <script type="text/javascript">
+ $().ready(function(){
+	 var i=1;
+	 
+	 $('p').each(function(){
+		 //class 속성을 지정할 경우 addClass()
+		 //태그 안에 id속성을 지정하는 경우 attr('id','test') 형식으로 추가
+		 $(this).addClass('s'+i);
+		 i++;
+		 if(i==5) 
+			 return false;
+	 })
+ })
+ 
+ </script>
+ 
+ 
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+이름 : <input type="text" id="name" placeholder="이름을 입력하세요">
+<div id="rs"></div>
+
+
+<script type="text/javascript">
+/* focus() : 마우스 포인터가 대상 엘리먼트에 위치할 때의 이벤트를 처리하는 이벤트 핸들러
+   blur() : 마우스 포인터가 대상 엘리먼트에서 포커스를 잃었을 때 이벤트를 처리하는 이벤트 핸들러
+*/
+$().ready(function(){
+	 $('input').focus(function(){
+		$(this).css('background-color','orange');
+	}); 
+	
+	$('input').blur(function(){
+		/* $(this).css('background-color','red'); */
+		var x=$('input').val();/* 자료형 검사 text 박스에 값이 있는지 없는지를 자료형 검사를 통해 알아냄*/
+		$('#rs').text(x);
+		if(x === ""){ /* 값이 없다면 */
+			$(this).css('background-color','red');
+	
+		}else{/* 값이 있다면 */
+			$(this).css('background-color','yellow');
+		}
+		
+		
+	});
+	
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
+

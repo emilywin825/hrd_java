@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript">
+
+$().ready(function(){
+	/* json 배열로 선언하고 결과 출력하기  */
+	/* 
+		이름 : 강호동
+		나이 : 25
+		
+		이름 : 뽀로로
+		나이	: 26
+		
+		이름 : 진달래
+		나이 : 27
+	*/
+	var emp=[{"name":"강호동", "age":"25"},
+			{"name":"뽀로로", "age":"26"},
+			{"name":"진달래", "age":"27"}];
+	
+	var msg="";
+	msg+="이름 : "+emp[0].name+"<br>나이 : "+emp[0].age+"<br><br>";
+	msg+="이름 : "+emp[1].name+"<br>나이 : "+emp[1].age+"<br><br>";
+	msg+="이름 : "+emp[2].name+"<br>나이 : "+emp[2].age+"<br><br>";
+		
+	$("#rs").html(msg);
+	
+});
+
+</script>
+</head>
+<body>
+	<h3>JSON표기법</h3>
+	<div id="rs"></div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

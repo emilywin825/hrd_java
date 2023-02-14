@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+</head>
+<body>
+<!-- 비밀번호가 일치합니다. / 비밀번호가 일치하지 않습니다 -->
+<h4>비밀번호를 입력하세요</h4>
+비밀번호 : <input type="text" id="pwd1">&nbsp;&nbsp;&nbsp;
+비밀번호확인: <input type="text" id="pwd2">&nbsp;&nbsp;&nbsp;
+<span id="rs"></span>
+
+	
+<script type="text/javascript">
+$().ready(function(){
+	$('#pwd2').keyup(function(){
+		if($('#pwd1').val()==$('#pwd2').val()) $('#rs').text("비밀번호가 일치합니다.");
+		else $('#rs').text("비밀번호가 일치하지 않습니다.");
+	})
+});
+</script>
+</body>
+</html>

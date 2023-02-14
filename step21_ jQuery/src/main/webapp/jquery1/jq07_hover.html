@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<style type="text/css">
+	.bold{ fond-size:17px; font-weight:700; color: limegreen;}
+
+</style>
+
+
+
+</head>
+<body>
+<div>강아지</div>
+<div>고양이</div>
+<div>고라니</div>
+<div>다람쥐</div>
+<div>호랑이</div>
+
+<script type="text/javascript">
+//hover : 객체에 마우스가 올라왔을 때 rollover
+$().ready(function(){
+	/* $('div').hover(function(){
+		$(this).css({'font-size' : '17px','font-weight' : '700'});
+	},function(){
+		$(this).removeAttr('style');
+	}); */
+//addClass() :요소에 지정한 클래스를 추가	
+/* 	$('div').hover(function(){
+		$(this).addClass('bold'); 
+	},function(){
+		$(this).removeClass('bold');
+	}); */
+// mouseover, mouseout : 두개를 이용하면 hover와 같은 효과를 낼 수 있음	
+
+	$('div').mouseover(function(){
+		$(this).addClass('bold');
+	})
+	$('div').mouseout(function(){
+		$(this).removeClass('bold');
+	})
+
+
+	
+	
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>

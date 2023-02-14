@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<style type="text/css">
+	.btnColor{color:limegreen;}
+</style>
+</head>
+<body>
+	<button>음악감상</button>
+	<button>영화감상</button>
+	<button>사진감상</button>
+	<button>종료하기</button>
+<div id="div"></div>
+	
+
+ <script type="text/javascript">
+var li={
+		'a':2;
+}	
+ 
+ $().ready(function(){ 
+	$('button').hover(function(){
+		$(this).addClass('btnColor');
+	},function(){
+		$(this).removeClass('btnColor');
+	});
+ });
+ 
+ </script>
+ 
+ 
+</body>
+</html>

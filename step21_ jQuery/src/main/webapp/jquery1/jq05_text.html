@@ -25,15 +25,20 @@
 
 <script type="text/javascript">
 	$().ready(function(){
+		$('#rs').text('왼쪽 메뉴를 선택하세요');
 		/* 버튼1을 눌렀습니다. style="color:red"
-			css('font','red','font-weight','bold','font-size','20px')
+			
 		*/
 		$('#btn1').click(function(){
-			
+			$('#rs').text("버튼1을 눌렀습니다.").css({'color':'red','font-weight':'bold','font-size':'20px'});
 		});
 		
-		
 		/* 버튼2를 눌렀습니다. */
+		$('#btn2').click(function(){
+			$('#rs').removeAttr('style');/* removeAttr('style') : 스타일 속성을 빼주겠다 */
+			$('#rs').text("button2를 눌렀습니다.").css({'color':'blue','font-weight':'bold','font-size':'20px'});		
+		
+		})
 	});
 </script>
 
