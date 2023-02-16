@@ -1,20 +1,27 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
-
-<!-- <form action="../get.do" method="get"> ���������� doGet������� ���������ϱ� method="get"
-	�̸� : <input type="text" name="irum"><br>
-	��ȣ : <input type="text" name="amho"><br>
+<!-- 
+	404 에러 : 페이지를 못찾음(파일이 없는 경우, 잘못 적은 이름)
+	405 에러 : 메서드를 못찾음
+	method="get" -> doGet으로
+	method="post" -> doPost로
 	
-	<input type="submit" value="����">
-	<input type="reset" value="���">
+ -->
 
-</form> -->
+
+<form action="../get.do" method="get"> <!-- method="get" 이니까 서블릿 페이지에서 doGet으로 받겠지요-->
+	이름 : <input type="text" name="irum"><br>
+	암호 : <input type="text" name="amho"><br>
+	
+	<input type="submit" value="전송">
+	<input type="reset" value="취소">
+</form>
 
 <script type="text/javascript">
 function one(arg1){
@@ -28,3 +35,7 @@ one('val1', 'val2');  // one.length 1 arguments 2
 
 </body>
 </html>
+<!-- 
+	get 방식(쿼리스트링) 
+	http://127.0.0.1:8080/servlet/get.do?irum=11&amho=11 ->11 :input 태그에서 입력한 것
+-->

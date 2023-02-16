@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="../post1.do" method="post"> <!-- method="post" 이니까 서블릿 페이지에서 doPost으로 받겠지요-->
+<!-- action="PostTest1.java의 urlpatterns를 찾아가기 때문에 urlpatterns를 적어주면 됩니다."  -->
+<h3>post 화면</h3>
+	이름 : <input type="text" name="irum"><br>
+	암호 : <input type="text" name="amho"><br>
+	
+	<input type="submit" value="전송">
+	<input type="reset" value="취소">
+</form>
+</body>
+</html>
+
+<!-- 
+	post 방식
+	http://127.0.0.1:8080/servlet/get.do?irum=11&amho=11 ->11 :input 태그에서 입력한 것
+-->
