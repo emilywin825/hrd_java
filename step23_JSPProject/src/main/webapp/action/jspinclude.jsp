@@ -22,4 +22,4 @@
 	<jsp:param value="china" name="country"/>
 </jsp:include><!-- 클라이언트 쪽에서 인클루드 처리 -->
 </body>
-</html>
+</html>                                        

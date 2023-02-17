@@ -18,7 +18,7 @@ public class PostTest2 extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");//화면에 보여질 데이터 처리.	
 		
 		//2. 데이터 가져오기, 계산
-		String name=request.getParameter("name");
+		String name=request.getParameter("name"); //request 객체에 담겨온 name의 파라미터를 뽑아내는게 getParameter
 		int score=Integer.parseInt(request.getParameter("score"));
 		
 		String result=null;

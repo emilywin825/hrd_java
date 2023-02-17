@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 //        클라이언트 요청에 동적으로 작동, 응답은 HTML 형식으로 제공(무조건은 아님)
 
 
-@WebServlet(name = "hello.do", urlPatterns = { "/hello.do" })
-public class HelloWervlet extends HttpServlet {
+@WebServlet(name = "hello.do", urlPatterns = { "/hello.do" })//파일 이름으로 접근하는게 아니라 urlPatterns로 접근해야 함
+public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
