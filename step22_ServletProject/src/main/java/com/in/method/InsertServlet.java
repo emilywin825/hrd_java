@@ -1,5 +1,4 @@
 package com.in.method;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -13,16 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Insert", urlPatterns = { "/Insert.do" })
+@WebServlet(name = "Insert", urlPatterns = { "/insert.do" })
 public class InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 한글처리
+		//1.한글처리
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		PrintWriter out=response.getWriter();
+		PrintWriter out=response.getWriter(); //웹에 출력
 		
 		//2. 데이터 가져오기
 		String name=request.getParameter("name");
@@ -30,57 +28,66 @@ public class InsertServlet extends HttpServlet {
 		String addr=request.getParameter("addr");
 		
 		//3. 출력
-		out.append("<html><head><title>....</title></head>");
-		out.append("<body>");	
+		out.append(
+				"<html><head><title>postTest1</title></head>");
+		out.append("<body>");
 		
 		out.append("<br><br>");
-		out.append("이름 : "+name+"</br>");
-		out.append("번호 : "+phone+"</br>");
-		out.append("주소 : "+addr+"</br>");
+		out.append("이름 : "+name+" ");
+		out.append("전화 : "+phone+" ");
+		out.append("주소 : "+addr+"<br>");
 		
 		Connection conn=null;
 		//4. db에 저장
 		try {
-			
-			try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "edu", "1234");
-				conn.setAutoCommit(false);
-				System.out.println("연결성공");
-			} catch (SQLException e) {
-				System.out.println("1111");
-			}						
-		} catch (ClassNotFoundException e) {
-			System.out.println("2222");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn=DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe","edu","1234");
+			conn.setAutoCommit(false);
+			//System.out.println("연결 성공~");
+		}catch (ClassNotFoundException e) {
+			// TODO: handle exception
+		}catch (SQLException e) {
+			// TODO: handle exception
 		}
+//		---------------------------------------------------------
 		
-		String sql="insert into users values(seq_no.nextval,?,?,?)";
 		PreparedStatement pstmt=null;
+		
+		String sql="insert into users values(seq_no.nextval, ?,?,?)";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, name);
-			pstmt.setString(2, phone);
-			pstmt.setString(3, addr);
+			pstmt.setString(2, name);
+			pstmt.setString(3, name);
 			int n=pstmt.executeUpdate();
 			if(n>0) {
 				conn.commit();
-				out.append("<br>데이터가 저장되었습니다.");
+				out.append("<br> 데이터가 저장되었습니다");
 			}
-			
+				
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
-				out.append("<br>데이터 저장에 실패");
+				out.append("<br> 데이터 저장에 실패하였습니다");
 			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			e.printStackTrace();
+			
 		}finally {
+			
 			try {
-				if (pstmt != null) pstmt.close();
-			} catch (SQLException e) { e.printStackTrace(); }
+				if(pstmt!=null)		pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		out.append("<a href='test/dbTest.html'>처음화면</>");
+		
+		out.append("<a href='test/dbTest.html'>처음화면</a>");
+	
 		out.append("</body></html>");
 	}
+
 }

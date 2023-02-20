@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="registerCheck.js"></script>
+<script>
+//jQuery를 이용해 패스워드에 값이 입력되면 '패스워드를 적어주세요'라는 문구를 없앰
+$().ready(function(){
+	$("#passwd").keyup(function(){
+		pw1=$("#passwd").val();
+		if(pw1!=""){//pw1이 공백이 아니면
+			$("#pwd1").html("");//문구을 없앰
+		}
+	});
+//jQuery 이용한 비번 일치 검사
+	$("#repasswd").keyup(function(){
+		pw1=$("#passwd").val(); pw2=$("#repasswd").val();
+		if(pw1!=pw2){
+			$("#pwd2").text("비밀번호가 틀립니다.").css({'font-weight':'bold','color':'red'});
+		}else{
+			$("#pwd2").text("비밀번호가 일치합니다.").css({'font-weight':'bold','color':'limegreen'});
+		}
+	});
+});
+</script>
 </head>
 
 <body>
-<form name="" method="" action="">
+<form name="regForm" method="post" action="registerProc.jsp"><!-- action : 폼 데이터가 서버로 제출될 때 입력 데이터를 처리할 파일의 URL을 명시 -->
 <table width="80%" align="center" border="0" cellspacing="0" cellpadding="5" >
   <tr> 
     <td align="center" valign="middle" > 
@@ -15,45 +37,52 @@
           </tr>
           <tr> 
             <td width="24%">*아이디</td>
-            <td width="35%"> <input type="text" name="" size="15" id=""> </td>
+            <td width="35%"> <input type="text" name="mem_id" size="15" id="sid"> </td>
             <td width="41%" id="idok">아이디를 적어 주세요.</td>
           </tr>
           <tr> 
             <td>*패스워드</td> 
-            <td> <input type="password" name="" size="15" id=""> </td>
+            <td> <input type="password" name="mem_passwd" size="15" id="passwd"> </td>
             <td id="pwd1">패스워드를 적어주세요.</td>
           </tr>
           <tr> 
             <td>*패스워드 확인</td>
-            <td> <input type="password" name="" size="15" id=""> </td>
+            <td> <input type="password" name="mem_repasswd" size="15" id="repasswd"> </td>
             <td id="pwd2">패스워드를 확인합니다.</td>
           </tr>
           <tr>  
             <td>*이름</td>
-              <td> <input type="text" name="" size="15"> </td>
+            <td> <input type="text" name="mem_name" size="15"> </td>
             <td>고객실명을 적어주세요.</td>
           </tr>
           <tr> 
             <td>이메일</td>
-            <td> <input type="text" name="" size="27"> </td>
+            <td> <input type="text" name="mem_email" size="27"> </td>
             <td>이메일을 적어주세요</td>
           </tr>
           <tr>  
             <td>전화번호</td>
-            <td> <input type="text" name="" size="20"> </td>
+            <td> <input type="text" name="mem_phone" size="20"> </td>
             <td>연락처를 적어주세요</td>
           </tr>
           <tr>  
             <td>주소</td>
             <td colspan="2"> 
-
-            	<input type="text" name="" size="50"> 
+            <!-- 카카오 주소 api 링크 : https://postcode.map.daum.net/guide -->
+            	<input type="text" id="sample4_postcode" name="mem_zipcode" placeholder="우편번호">
+				<input type="button" onclick="zipCode()" value="우편번호 찾기"><br>
+				<input type="text" id="sample4_roadAddress" name="mem_roadaddr"placeholder="도로명주소">
+				<input type="text" id="sample4_jibunAddress" name="mem_jibunaddr" placeholder="지번주소">
+				<span id="guide" style="color:#999;display:none"></span>
+				<input type="text" id="sample4_detailAddress" name="mem_detailaddr" placeholder="상세주소">
+				<input type="text" id="sample4_extraAddress" name="mem_extraaddr" placeholder="참고항목">
+				<input type="text" id="mem_addr" name="mem_addr" style="display:none">
             </td>
           </tr>
           <tr> 
             <td colspan="3" align="center"> 
-             <input type="button" value="회원가입" onclick="">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-             <input type="reset" value="다시쓰기"> 
+             <input type="button" value="회원가입" onclick="check()">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+             <input type="button" value="다시쓰기"> 
             </td>
           </tr>
       </table>
@@ -61,5 +90,67 @@
   </tr>
 </table>
 </form>
+
+<script type="text/javascript">
+//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+function zipCode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            //var detailAddress='';
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode;
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+           // document.getElementById("sample4_detailAddress").value = data.detailAddress;
+            
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("sample4_extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                guideTextBox.style.display = 'block';
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+            document.getElementById("mem_addr").value=roadAddr+ " "+extraRoadAddr;
+            document.getElementById("sample4_detailAddress").focus();
+        }
+    }).open();
+}
+</script>
 </body>
 </html>

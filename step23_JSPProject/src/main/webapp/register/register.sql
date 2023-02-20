@@ -15,12 +15,13 @@ passwd varchar2(10) not null,
 name varchar2(20) not null,
 email varchar2(30),
 phone varchar2(15),
-zipcode varchar2(7),
+zipcode varchar2(5),
 addr varchar2(70));
 
 select * from tab;
 select * from member;
 
+insert 
 
 select * from zipcode;
 
