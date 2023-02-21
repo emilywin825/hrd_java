@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<Resource
+	name="jdbc/ora" 
+	author="Container"
+	type="javax.sql.DataSource"
+	username="edu"
+	password="1234"
+	driverClassName="oracle.jdbc.driver.OracleDriver"
+	url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
+>
+</Resource>
+</Context>
+
+<!-- 
+	컨넥션 풀 (Connection )
+	데이터베이스에 미리 접속하여 연결을 해두고 프로그램에서는 
+	미리 연결되어 있는 객체를 받아서 사용하고 반환하는 방법
+	META-INF 디렉토리에 context.xml 파일에 연결 옵션을 작성
+	
+	name="사용자가 정하는 이름" 
+	author="인증 주체"
+	type="데이터베이스 종류별 DataSource"
+	username="데이터베이스 접속 아이디"
+	password="데이터베이스 접속 비밀번호"
+	driverClassName=" 연결할 데이터베이스 종류에 따른 드라이버 클래스 이름"
+	url="접속할 데이터베이스 주소와 포트 번호 및 SID(데이터 베이스 위치)"
+	maxActive="동시접속개수"
+	maxIdle="작업 수행 없이 연결만 해두고 있을 최대 개수(동시에 idle 상태로 대기할 수 있는 최대 수)"
+	
+	
+	
+-->

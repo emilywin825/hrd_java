@@ -1,0 +1,6 @@
+step08_loginProject--Dynamic web project
+					 Dynamic web module version : 3.0이상
+					 context root : log
+					 content directory : webapp
+					
+src/main/				

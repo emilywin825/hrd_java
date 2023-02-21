@@ -6,7 +6,7 @@
 %>		
 <html>
 <head><title>회원가입 확인</title></head>
-<jsp:useBean id="ob" class="register.RegisterEntity" scope="session"></jsp:useBean> <!-- scope="session" 사용자가 최초에 접속하여 세션이 종료되기까지 존대 -->
+<jsp:useBean id="ob" class="register.RegisterEntity" scope="session"></jsp:useBean> <!-- scope="session" 사용자가 최초에 접속하여 세션이 종료되기까지 존재 -->
 <jsp:setProperty property="*" name="ob"></jsp:setProperty> <!--이 코드를 이용해서 RegisterEntity.java에 저장 -->
 <%
 	String post1=request.getParameter("mem_zipcode");
