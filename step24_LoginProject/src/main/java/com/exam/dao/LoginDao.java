@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import com.exam.entity.LoginEntity;
 import static common.JdbcTemplate.*;
 
+/*MVC 패턴 중 M의 역할*/
+public class LoginDao { /* 비지니스 로직을 수행 */
 
-public class LoginDao {
-
-	public LoginEntity getLoginUser(String id, String pwd) {
+	public LoginEntity getLoginUser(String id, String pwd) { 
 		Connection conn=getConnecton();
 		LoginEntity entity=null;
 		PreparedStatement pstmt=null;
@@ -23,7 +23,9 @@ public class LoginDao {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			rs=pstmt.executeQuery();
-			//if(rs==null) System.out.println("rs null");
+			
+			if(entity==null) System.out.println("LoginDao_rs null");
+			
 			if(rs.next()) {
 				entity=new LoginEntity();
 				entity.setId(rs.getString("id"));
@@ -38,7 +40,7 @@ public class LoginDao {
 			close(rs);
 			close(pstmt);
 		}
-		return entity;
+		return entity; /* 수행 결과를 컨트롤러에 리턴 */
 	}
 
 }

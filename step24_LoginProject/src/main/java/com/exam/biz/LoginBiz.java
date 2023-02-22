@@ -8,8 +8,8 @@ public class LoginBiz {
 	
 	public LoginEntity getLoginUser(String id, String pwd) {
 		LoginDao dao=new LoginDao();
-		LoginEntity entity=dao.getLoginUser(id,pwd);
-		if(entity==null) System.out.println("entity null");
+		LoginEntity entity = dao.getLoginUser(id, pwd); /* 요청한 비지니스로직을 처리하는 모델 */
+		if(entity==null) System.out.println("LoginBiz_entity null");
 		return entity;
 	}
 }
