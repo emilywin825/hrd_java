@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 로그인에는 보안상의 이유로 Ajax 사용하지 않음.. 아니 근데 이거 진짜 왜하는거.... -->
+<!-- 아이디 비번을 입력하면 이 페이지에 아이디 비번이 찍히고 나서 longin.jsp로 이동하는 방식 -->
+</head>
+<body>
+<h3>계정과 패스워드를 입력하세요</h3>
+<form id="loginf" action="login.jsp">
+	<table>
+		<tr>
+			<td><label for="id">계정</label></td>
+			<td><input type="text" id="id" name="id" required></label></td>
+		</tr>
+		<tr>
+			<td><label for="passwd">패스워드</label></td>
+			<td><input type="text" id="passwd" name="passwd" required></label></td>
+		</tr>
+		<tr>
+			<td><input type="submit" id="loginb" value="로그인"></td>
+			<td><output></output></td>
+		</tr>
+	</table>
+</form>
+
+<script type="text/javascript">
+	window.addEventListenr("load",function(){
+		document.getElementById("loginb").onclick=handleButtonPress;
+	});
+	
+	var xhr;
+	var id;
+	
+	function handleButtonPress(e){
+		<!-- 아이디 비번을 입력하면 이 페이지에 아이디 비번이 찍히고 나서 longin.jsp로 이동하는 방식을 구현 중이기 때문에
+		     아이디 비번이 찍히기 전까지 다른일을 못다도록 하는 함수가 preventDefault();-->
+		e.preventDefault(); //목적 : 비동기처리		
+		xhr=new XMLHttpRequest();
+		form=document.querySelector("#loginf"); /* querySelector : 선택한 거 지정해주는 용도 getElementById()와 같은 용도 */
+		id=document.querySelector("#id");
+		passwd=document.querySelector("#passwd");
+		
+		queryString="id="+encodeURI(id.value)+"&passwd="+encodeURI(passwd.value);
+		/* 만약 id,pw가 아니라 한글이 들어가게 되면 encodeURI(id.value) 해야함 */
+		
+		xhr.addEventListener("load", handleResponse); //******
+		
+		xhr.open("POST", form.action, true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		xhr.send(queryString);
+	}
+	//아이디 비번 비교
+	function handleResponse(){//login.jsp에서 넘어오는 json 데이터 result가 ok인지 fail인지 판단
+		var jsonObj=JSON.parse(xhr.responseText);
+		var output=document.querySelector("output");
+		if(jsonObj.result=="ok"){
+			output.textContent="로그인 성공";
+			output.style.color="blue";
+		}else if(jsonObj.result=="fail"){
+			output.textContent="로그인 실패";
+			output.style.color="red";
+			form.reset();
+			id.focus();
+		}
+	}
+</script>
+</body>
+</html>

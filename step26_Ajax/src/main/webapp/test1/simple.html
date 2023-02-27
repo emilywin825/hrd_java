@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ </head>
+<body>
+	<input type="button" value="simple.html" onclick="load(value)"> <!-- load(value)에서 value : simple.html -->
+	<script type="text/javascript">
+		var httpRequest=null;
+		
+		function getXMLHttpRequest(){ 
+			if(window.ActiveXObject){ 
+					return new ActiveXObject("Msxml2.XMLHTTP");
+				} else if(window.XMLHttpRequest){
+					return new XMLHttpRequest();
+				}
+			}
+			return null();
+		
+		function load(url){
+			
+			httpRequest=getXMLHttpRequest(); //통신객체 생성.
+			
+			httpRequest.onreadystatechange=function viewMessage(){
+				if(httpRequest.readyState==4){ /* 맞다면 연결 성공 */
+					if(httpRequest.status==200) /* 맞다면 정상*/
+						alert("응답 : "+httpRequest.status);
+					else alert("실패 : "+httpRequest.status);
+				}
+			}; 
+			
+			httpRequest.open("GET",url, true);
+			HttpRequest.send(null);
+		}
+	</script>
+</body>
+</html>
